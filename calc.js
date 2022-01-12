@@ -1,32 +1,20 @@
 function calc(a, b, operator) {
-    const isNotValid = (typeof a != 'number') || (typeof b != 'number');
-    if (isNotValid) {
-        return 'Error!'
-    }
-    let result = calcNumber(a, b, operator)
-    return result
-}
-function calcNumber(a, b, operator) {
-    let operations = {
+    const isNotValid = typeof a !== 'number' || typeof b !== 'number'
+    const operations = {
+        sub: a - b,
         sum: a + b,
-        min: a - b,
-        multi: a * b,
+        mult: a * b,
         div: a / b,
     }
-    if (!operations[operator]) {
-        return 'Unknown operator'
-    } else if (operations[operator] === Infinity) {
-        return 'Division by zero!'
-    }
-    else {
-        return operations[operator];
+    if (isNotValid) {
+        return 'Enter a number'
+    } else if (operator === 'div' && b === 0) {
+        return 'Division by zero'
+    } else if (operations[operator] === undefined) {
+        return 'Uncorrected operator'
+    } else if (operator in operations) {
+        return operations[operator]
     }
 }
 
-console.log(calc(6, 0, 'div'));
-
-
-
-
-
-
+console.log(calc(0, 0, 'mult'))
